@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "title": "Hotel Intercontinental",
+    "description": "Hotel 5 estrellas en el centro",
+    "code": "HTL001",
+    "price": 320,
+    "status": true,
+    "stock": 5,
+    "category": "Hotel",
+    "thumbnails": [
+      "http://example.com/foto1.jpg"
+    ]
+  }
+]

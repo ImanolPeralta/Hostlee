@@ -1,0 +1,36 @@
+<section class="hero">
+  <div class="hero-overlay">
+    <h1 class="hero-title">¿A donde te gustaría viajar?</h1>
+    <form action="/search" method="GET" class="search-bar">
+      <input
+        type="text"
+        name="query"
+        placeholder="Conocé nuestras opciones..."
+        required
+      />
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
+</section>
+
+<h1 class="section-title">Nuestras Propiedades</h1>
+
+<div class="product-grid">
+  {{#each products}}
+    <div class="product-card">
+      {{#if this.thumbnails.length}}
+        <img src="{{this.thumbnails.[0]}}" alt="{{this.title}}" />
+      {{else}}
+        <img src="/img/default-product.png" alt="Imagen no disponible" />
+      {{/if}}
+      <div class="product-details">
+        <h3>{{this.title}}</h3>
+        <p class="description">{{this.description}}</p>
+        <p class="price">Precio por noche: <strong>${{this.price}}</strong></p>
+        <p class="stock">Habitaciones disponibles: <strong>{{this.stock}}</strong></p>
+        <button class="reserve-btn" onclick="addToCart('{{this.id}}')">Reservar</button>
+      </div>
+    </div>
+  {{/each}}
+</div>
+

@@ -1,0 +1,86 @@
+<h1 class="admin-title">{{title}}</h1>
+
+<form id="productForm">
+  <input type="text" name="title" placeholder="Título" required />
+  <input type="text" name="description" placeholder="Descripción" required />
+  <input type="number" name="price" placeholder="Precio" required />
+  <input type="text" name="code" placeholder="Código" required />
+  <input type="number" name="stock" placeholder="Stock" required />
+  <input type="text" name="category" placeholder="Categoría" required />
+  <input type="text" name="imageUrl" placeholder="URL de imagen" required />
+  <button type="submit">Agregar producto</button>
+</form>
+
+<h2 class="section-title">Lista de productos</h2>
+<ul id="productList">
+  {{#each products}}
+    <li data-id="{{this.id}}">
+      <strong>{{this.title}}</strong>
+      <span>Precio: ${{this.price}}</span>
+      <button onclick="deleteProduct('{{this.id}}')">Eliminar</button>
+    </li>
+  {{/each}}
+</ul>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  const form = document.getElementById('productForm');
+  const list = document.getElementById('productList');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const product = Object.fromEntries(formData.entries());
+
+    product.price = Number(product.price);
+    product.stock = Number(product.stock);
+
+    socket.emit('nuevoProducto', product);
+    form.reset();
+  });
+
+  function deleteProduct(id) {
+    socket.emit('eliminarProducto', id);
+  }
+
+  socket.on('productosActualizados', (products) => {
+    list.innerHTML = '';
+    products.forEach(p => {
+      const li = document.createElement('li');
+      li.dataset.id = p.id;
+
+      // Imagen
+      if (p.thumbnails && p.thumbnails.length > 0) {
+        const img = document.createElement('img');
+        img.src = p.thumbnails[0];
+        img.alt = p.title;
+        img.style.width = '100px';
+        img.style.height = 'auto';
+        img.style.marginRight = '10px';
+        img.style.verticalAlign = 'middle';
+        li.appendChild(img);
+      }
+
+      // Título
+      const title = document.createElement('strong');
+      title.textContent = p.title;
+      li.appendChild(title);
+
+      // Precio
+      const price = document.createElement('span');
+      price.textContent = ` - $${p.price}`;
+      price.style.marginLeft = '8px';
+      li.appendChild(price);
+
+      // Botón eliminar
+      const btn = document.createElement('button');
+      btn.textContent = 'Eliminar';
+      btn.onclick = () => deleteProduct(p.id);
+      btn.style.marginLeft = '15px';
+      li.appendChild(btn);
+
+      list.appendChild(li);
+    });
+  });
+</script>

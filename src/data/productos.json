@@ -1,15 +1,522 @@
 [
   {
     "id": 1,
-    "title": "Hotel Intercontinental",
-    "description": "Hotel 5 estrellas en el centro",
-    "code": "HTL001",
-    "price": 320,
+    "title": "Hostel del Bosque",
+    "description": "Hostel cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "HOS001",
+    "price": 173,
+    "status": true,
+    "stock": 3,
+    "category": "Hostel",
+    "thumbnails": [
+      "https://www.interpatagonia.com/plantillas/grandes/9245-00Gr.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Cabaña Moderna",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB002",
+    "price": 379,
     "status": true,
     "stock": 5,
-    "category": "Hotel",
+    "category": "Cabaña",
     "thumbnails": [
-      "http://example.com/foto1.jpg"
+      "https://content.arquitecturaydiseno.es/medio/2020/11/30/con-las-plataformas-bajadas-la-cabana-se-muestra-transparente-y-abierta-al-entorno_573a4668_1280x794.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Cabaña junto al Lago",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB003",
+    "price": 317,
+    "status": true,
+    "stock": 2,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/08/a3/8e/cabanas-rincon-del-lago.jpg?w=900&h=500&s=1"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Casa del Bosque",
+    "description": "Casa cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAS004",
+    "price": 243,
+    "status": true,
+    "stock": 4,
+    "category": "Casa",
+    "thumbnails": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ris7qE2JK9137f_VqXW7gPj5BptCfMa2Qw&s"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Cabaña junto al Lago",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB005",
+    "price": 452,
+    "status": true,
+    "stock": 3,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://cabañasbariloche.com.ar/img/cabanas/vrbo/cabanas-bahia-protegida-costa-lago-a.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Refugio junto al Lago",
+    "description": "Refugio cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "REF006",
+    "price": 198,
+    "status": true,
+    "stock": 3,
+    "category": "Refugio",
+    "thumbnails": [
+      "https://static.wixstatic.com/media/da2825_ed29ebc298534d75b2673b9cbbef3bf3~mv2.jpg/v1/fit/w_2500,h_1330,al_c/da2825_ed29ebc298534d75b2673b9cbbef3bf3~mv2.jpg"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Lodge junto al Lago",
+    "description": "Lodge cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "LOD007",
+    "price": 290,
+    "status": true,
+    "stock": 5,
+    "category": "Lodge",
+    "thumbnails": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/338629362.jpg?k=7362019f1186b3e48ac7e7bf14f8b1d5eb06b38901c5ebefc4a1b185456a2faf&o=&hp=1"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Lodge junto al Lago",
+    "description": "Lodge cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "LOD008",
+    "price": 306,
+    "status": true,
+    "stock": 2,
+    "category": "Lodge",
+    "thumbnails": [
+      "https://images.trvl-media.com/lodging/27000000/26940000/26930800/26930737/ae6b065a.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Hostel de Montaña",
+    "description": "Hostel cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "HOS009",
+    "price": 132,
+    "status": true,
+    "stock": 2,
+    "category": "Hostel",
+    "thumbnails": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/523841992.jpg?k=a1317b5e6726eead68af9e15dab419d33322d38839b711b0174d48bf8d5456df&o=&hp=1"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Cabaña Moderna",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB010",
+    "price": 396,
+    "status": true,
+    "stock": 1,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://hips.hearstapps.com/hmg-prod/images/4-rma-fn-18-65ba168cbe439.jpg?crop=0.669xw:1.00xh;0.166xw,0&resize=640:*"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Cabaña de Montaña",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB011",
+    "price": 140,
+    "status": true,
+    "stock": 5,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://hips.hearstapps.com/hmg-prod/images/cabana-arquitectura-rustica-y-contemporanea2-1601627595.jpg?resize=980:*"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Refugio junto al Lago",
+    "description": "Refugio cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "REF012",
+    "price": 87,
+    "status": true,
+    "stock": 2,
+    "category": "Refugio",
+    "thumbnails": [
+      "https://isacom-879e.kxcdn.com/wp-content/uploads/2017/09/refugio-junto-al-Lago-Simcoe.jpg?iv=1973"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Hostel del Bosque",
+    "description": "Hostel cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "HOS013",
+    "price": 255,
+    "status": true,
+    "stock": 1,
+    "category": "Hostel",
+    "thumbnails": [
+      "https://hostal-del-bosque.hotels-argentina.net/data/Images/OriginalPhoto/12827/1282784/1282784692/image-ushuaia-hostal-del-bosque-8.JPEG"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Refugio de Montaña",
+    "description": "Refugio cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "REF014",
+    "price": 458,
+    "status": true,
+    "stock": 3,
+    "category": "Refugio",
+    "thumbnails": [
+      "https://resizer.glanacion.com/resizer/v2/refugio-general-san-W4NBAFB2YJHDLEYCER7U3QEICQ.jpg?auth=c432a9549384ab8d06326934ac5f9c5635da1d6a95e57b97def0457a89422e91&width=420&height=315&quality=70&smart=true"
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Cabaña junto al Lago",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB015",
+    "price": 186,
+    "status": true,
+    "stock": 3,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://i.redd.it/3mm2rm96xfd11.jpg"
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Refugio Moderna",
+    "description": "Refugio cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "REF016",
+    "price": 489,
+    "status": true,
+    "stock": 4,
+    "category": "Refugio",
+    "thumbnails": [
+      "https://images.adsttc.com/media/images/5e2f/398c/3312/fd88/4d00/0736/medium_jpg/Jose_Campos.jpg?1580153217"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Lodge junto al Lago",
+    "description": "Lodge cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "LOD017",
+    "price": 432,
+    "status": true,
+    "stock": 1,
+    "category": "Lodge",
+    "thumbnails": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSus0Q8MEd8CDTNak7m5z-JpgU00eJLIqXhnnG7GNLrdBR0m1XtGeIRKggD0k1xdHHtTYY&usqp=CAU"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Hostel junto al Lago",
+    "description": "Hostel cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "HOS018",
+    "price": 100,
+    "status": true,
+    "stock": 3,
+    "category": "Hostel",
+    "thumbnails": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/c6/c9/10/hostal-del-lago.jpg?w=900&h=500&s=1"
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Apartamento junto al Lago",
+    "description": "Apartamento cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "APA019",
+    "price": 121,
+    "status": true,
+    "stock": 4,
+    "category": "Apartamento",
+    "thumbnails": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/603685624.jpg?k=87298be5cca46f011ed7099cf79e33508cb353ddbd3056d980908e3c4d1ea86b&o=&hp=1"
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Cabaña de Montaña",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB020",
+    "price": 392,
+    "status": true,
+    "stock": 4,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://hips.hearstapps.com/hmg-prod/images/cabana-arquitectura-rustica-y-contemporanea2-1601627595.jpg?resize=980:*"
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Casa Moderna",
+    "description": "Casa cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAS021",
+    "price": 486,
+    "status": true,
+    "stock": 4,
+    "category": "Casa",
+    "thumbnails": [
+      "https://images.homify.com/c_fill,f_auto,h_500,q_auto,w_1280/v1453219822/p/photo/image/1255680/Arquiteta_Camila_Castilho-84.jpg"
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Cabaña de Montaña",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB022",
+    "price": 263,
+    "status": true,
+    "stock": 5,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://images.adsttc.com/media/images/550b/82ab/e58e/ceb2/7000/0164/newsletter/portada_ATI_9911.jpg?1426817680"
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Cabaña junto al Lago",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB023",
+    "price": 269,
+    "status": true,
+    "stock": 3,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzfwi3V6BTVaa2zHKKiWj6RWr9oP6c3oBcSA&s"
+    ]
+  },
+  {
+    "id": 24,
+    "title": "Cabaña de Montaña",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB024",
+    "price": 408,
+    "status": true,
+    "stock": 1,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/229819143.jpg?k=2011fea1afb3ab38184d77e26841a9784b6995e63f722267301d85b09822670e&o=&hp=1"
+    ]
+  },
+  {
+    "id": 25,
+    "title": "Refugio junto al Lago",
+    "description": "Refugio cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "REF025",
+    "price": 153,
+    "status": true,
+    "stock": 3,
+    "category": "Refugio",
+    "thumbnails": [
+      "https://images.adsttc.com/media/images/64e8/f82a/fbc6/580a/e167/5587/large_jpg/refugio-do-lago-leila-dionizios_18.jpg?1692989519"
+    ]
+  },
+  {
+    "id": 26,
+    "title": "Casa del Bosque",
+    "description": "Casa cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAS026",
+    "price": 207,
+    "status": true,
+    "stock": 4,
+    "category": "Casa",
+    "thumbnails": [
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/2220020.jpg?k=dc579933371d3047605c1cf4d8b3b0267369d3d9152a27eb7bf5ddfa03931ab9&o=&hp=1"
+    ]
+  },
+  {
+    "id": 27,
+    "title": "Casa Rústica",
+    "description": "Casa cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAS027",
+    "price": 201,
+    "status": true,
+    "stock": 2,
+    "category": "Casa",
+    "thumbnails": [
+      "https://images.homify.com/v1442851444/p/photo/image/925738/Vale_das_Videiras_2.jpg"
+    ]
+  },
+  {
+    "id": 28,
+    "title": "Cabaña de Montaña",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB028",
+    "price": 108,
+    "status": true,
+    "stock": 2,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_F-L72_HygVLXmq_bcZ4so0e2MXs1kwFQTA&s"
+    ]
+  },
+  {
+    "id": 29,
+    "title": "Hostel junto al Lago",
+    "description": "Hostel cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "HOS029",
+    "price": 388,
+    "status": true,
+    "stock": 5,
+    "category": "Hostel",
+    "thumbnails": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/8e/a8/17/hotel-villa-flori.jpg?w=1200&h=-1&s=1"
+    ]
+  },
+  {
+    "id": 30,
+    "title": "Lodge del Bosque",
+    "description": "Lodge cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "LOD030",
+    "price": 215,
+    "status": true,
+    "stock": 5,
+    "category": "Lodge",
+    "thumbnails": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/d3/3a/f1/lodge-bosques-de-san.jpg?w=900&h=500&s=1"
+    ]
+  },
+  {
+    "id": 31,
+    "title": "Refugio de Montaña",
+    "description": "Refugio cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "REF031",
+    "price": 481,
+    "status": true,
+    "stock": 2,
+    "category": "Refugio",
+    "thumbnails": [
+      "https://s3-sa-east-1.amazonaws.com/fb-sharing/refugio-puesto-cagliero-el-chalten.jpg"
+    ]
+  },
+  {
+    "id": 32,
+    "title": "Cabaña junto al Lago",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB032",
+    "price": 219,
+    "status": true,
+    "stock": 5,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://cabañasbariloche.com.ar/img/cabanas/vrbo/cabana-acogedora-en-el-bosque-de-bariloche.jpg"
+    ]
+  },
+  {
+    "id": 33,
+    "title": "Hostel junto al Lago",
+    "description": "Hostel cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "HOS033",
+    "price": 354,
+    "status": true,
+    "stock": 2,
+    "category": "Hostel",
+    "thumbnails": [
+      "https://q-xx.bstatic.com/xdata/images/hotel/max500/712035984.jpg?k=9ff2364cf22e63381799c8a2bcee0d8d9274e2257725b62eb7e81af60040d83f&o="
+    ]
+  },
+  {
+    "id": 34,
+    "title": "Cabaña junto al Lago",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB034",
+    "price": 475,
+    "status": true,
+    "stock": 5,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8TnFRna83ZzdRdBcqomL60YIMhv2JdbTPFA&s"
+    ]
+  },
+  {
+    "id": 35,
+    "title": "Apartamento de Montaña",
+    "description": "Apartamento cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "APA035",
+    "price": 457,
+    "status": true,
+    "stock": 4,
+    "category": "Apartamento",
+    "thumbnails": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ0iyKKVniEehuTIgM9ia03hGLH9oh2KhQYA&s"
+    ]
+  },
+  {
+    "id": 36,
+    "title": "Refugio de Montaña",
+    "description": "Refugio cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "REF036",
+    "price": 451,
+    "status": true,
+    "stock": 3,
+    "category": "Refugio",
+    "thumbnails": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsFic2TjBlE1t4M33Aidg81_S2Iz5cC8sypA&s"
+    ]
+  },
+  {
+    "id": 37,
+    "title": "Hostel junto al Lago",
+    "description": "Hostel cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "HOS037",
+    "price": 86,
+    "status": true,
+    "stock": 2,
+    "category": "Hostel",
+    "thumbnails": [
+      "https://www.tangol.com/Blog/Fotos/Notas/hospedaje-penthouse-1004_1677_202105061026390.Original-resized.jpg"
+    ]
+  },
+  {
+    "id": 38,
+    "title": "Cabaña Moderna",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB038",
+    "price": 401,
+    "status": true,
+    "stock": 3,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://images.adsttc.com/media/images/6629/93bc/65cb/8801/7c9d/af67/newsletter/interiores-de-madera-10-cabanas-que-aportan-calidez-en-mexico-brasil-chile-y-mas_3.jpg?1714000834"
+    ]
+  },
+  {
+    "id": 39,
+    "title": "Lodge de Montaña",
+    "description": "Lodge cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "LOD039",
+    "price": 257,
+    "status": true,
+    "stock": 5,
+    "category": "Lodge",
+    "thumbnails": [
+      "https://laquebrada.ar/wp-content/uploads/2024/12/PH_3303-scaled.jpg"
+    ]
+  },
+  {
+    "id": 40,
+    "title": "Cabaña Moderna",
+    "description": "Cabaña cómoda y bien ubicada, ideal para vacaciones.",
+    "code": "CAB040",
+    "price": 246,
+    "status": true,
+    "stock": 4,
+    "category": "Cabaña",
+    "thumbnails": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqTmeKakjS7oZBhDbfBTVkKOcbGawM7AHePA&s"
     ]
   }
 ]

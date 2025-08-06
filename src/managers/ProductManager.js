@@ -1,30 +1,49 @@
-import fs from "fs/promises";
-import path from "path";
-
-const filePath = path.resolve("src/data/productos.json");
+import ProductModel from "../data/models/Product.js";
 
 export default class ProductManager {
-  constructor() {
-    this.path = filePath;
+  // Obtener productos con paginación, filtros y orden
+  async getProducts({ limit = 40, page = 1, sort, query } = {}) {
+    const filter = {};
+
+    if (query) {
+      if (query === "available") {
+        filter.stock = { $gt: 0 };
+      } else {
+        filter.category = query;
+      }
+    }
+
+    const options = {
+      limit: parseInt(limit),
+      page: parseInt(page),
+      sort:
+        sort === "asc" || sort === "desc"
+          ? { price: sort === "asc" ? 1 : -1 }
+          : {},
+      lean: true,
+    };
+
+    const result = await ProductModel.paginate(filter, options);
+
+    return {
+      status: "success",
+      payload: result.docs,
+      totalPages: result.totalPages,
+      prevPage: result.prevPage,
+      nextPage: result.nextPage,
+      page: result.page,
+      hasPrevPage: result.hasPrevPage,
+      hasNextPage: result.hasNextPage,
+      prevLink: result.hasPrevPage ? `?page=${result.prevPage}` : null,
+      nextLink: result.hasNextPage ? `?page=${result.nextPage}` : null,
+    };
   }
 
-  // Leer todos los productos
-  async getProducts(limit = null) {
-    const data = await this.#readFile();
-    return limit ? data.slice(0, limit) : data;
-  }
-
-  // Buscar por ID
   async getProductById(id) {
-    const data = await this.#readFile();
-    return data.find((prod) => prod.id === id);
+    return ProductModel.findById(id).lean();
   }
 
-  // Agregar producto
   async addProduct(product) {
-    const data = await this.#readFile();
-
-    // Validar campos obligatorios
     const requiredFields = [
       "title",
       "description",
@@ -39,69 +58,26 @@ export default class ProductManager {
       throw new Error(`Faltan campos obligatorios: ${missing.join(", ")}`);
     }
 
-    const newProduct = {
-      id: this.#generateId(data),
-      title: product.title,
-      description: product.description,
-      code: product.code,
-      price: product.price,
+    const newProduct = await ProductModel.create({
+      ...product,
       status: product.status ?? true,
-      stock: product.stock,
-      category: product.category,
       thumbnails: product.thumbnails || [],
-    };
+    });
 
-    data.push(newProduct);
-    await this.#saveFile(data);
-    return newProduct;
+    return newProduct.toObject();
   }
 
-  // Actualizar producto
   async updateProduct(id, updates) {
-    const data = await this.#readFile();
-    const index = data.findIndex((prod) => prod.id === id);
+    const updated = await ProductModel.findByIdAndUpdate(id, updates, {
+      new: true,
+      runValidators: true,
+    }).lean();
 
-    if (index === -1) return null;
-
-    const updatedProduct = {
-      ...data[index],
-      ...updates,
-      id: data[index].id, // No se permite cambiar el ID
-    };
-
-    data[index] = updatedProduct;
-    await this.#saveFile(data);
-    return updatedProduct;
+    return updated;
   }
 
-  // Eliminar producto
   async deleteProduct(id) {
-    const data = await this.#readFile();
-    const filtered = data.filter((prod) => prod.id !== id);
-    if (filtered.length === data.length) return false;
-
-    await this.#saveFile(filtered);
-    return true;
-  }
-
-  // Métodos privados
-  async #readFile() {
-    try {
-      const content = await fs.readFile(this.path, "utf-8");
-      return JSON.parse(content);
-    } catch (error) {
-      return [];
-    }
-  }
-
-  async #saveFile(data) {
-    await fs.writeFile(this.path, JSON.stringify(data, null, 2));
-  }
-
-  #generateId(data) {
-    const ids = data
-      .map((p) => (typeof p.id === "number" ? p.id : parseInt(p.id)))
-      .filter((n) => !isNaN(n));
-    return ids.length ? Math.max(...ids) + 1 : 1;
+    const result = await ProductModel.findByIdAndDelete(id);
+    return !!result;
   }
 }

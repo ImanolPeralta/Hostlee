@@ -7,9 +7,9 @@ const manager = new ProductManager();
 // GET /api/products/?limit=5
 router.get("/", async (req, res) => {
   try {
-    const limit = req.query.limit ? parseInt(req.query.limit) : null;
-    const products = await manager.getProducts(limit);
-    res.json(products);
+    const { limit, page, sort, query } = req.query;
+    const result = await manager.getProducts({ limit, page, sort, query });
+    res.json(result);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener productos." });
   }
@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
 // GET /api/products/:pid
 router.get("/:pid", async (req, res) => {
   try {
-    const id = parseInt(req.params.pid);
+    const id = req.params.pid;
     const product = await manager.getProductById(id);
 
     if (!product) {
@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
 // PUT /api/products/:pid
 router.put("/:pid", async (req, res) => {
   try {
-    const id = parseInt(req.params.pid);
+    const id = req.params.pid;
     const updated = await manager.updateProduct(id, req.body);
 
     if (!updated) {
@@ -60,7 +60,7 @@ router.put("/:pid", async (req, res) => {
 // DELETE /api/products/:pid
 router.delete("/:pid", async (req, res) => {
   try {
-    const id = parseInt(req.params.pid);
+    const id = req.params.pid;
     const deleted = await manager.deleteProduct(id);
 
     if (!deleted) {

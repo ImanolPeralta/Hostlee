@@ -8,17 +8,28 @@ import cartsRouter from "./routes/carts.router.js";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import ProductManager from "./managers/ProductManager.js";
+import connectDB from "./data/db.js";
 
 const app = express();
 const PORT = 8080;
 const httpServer = createServer(app);
 const io = new Server(httpServer);
-const productManager = new ProductManager(
-  path.join(__dirname, "src/data/productos.json")
-);
 
-// Motor de vistas Hanblebars
-app.engine("handlebars", engine());
+// Ya no pasamos ruta a ProductManager porque usaremos Mongo
+const productManager = new ProductManager();
+
+// Conectar a la base de datos
+connectDB();
+
+// Motor de vistas Handlebars
+app.engine(
+  "handlebars",
+  engine({
+    helpers: {
+      eq: (a, b) => a === b,
+    },
+  })
+);
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
 
@@ -36,26 +47,27 @@ app.use("/", viewsRouter);
 io.on("connection", async (socket) => {
   console.log("🟢 Cliente conectado");
 
-  socket.emit("productosActualizados", await productManager.getProducts());
+  // Traemos solo el array de productos con payload
+  const result = await productManager.getProducts();
+  socket.emit("productosActualizados", result.payload);
 
   socket.on("nuevoProducto", async (producto) => {
-    // Convertir la propiedad imageUrl a thumbnails array
     if (producto.imageUrl) {
       producto.thumbnails = [producto.imageUrl];
-      delete producto.imageUrl; // opcional, para limpiar el objeto
+      delete producto.imageUrl;
     } else {
       producto.thumbnails = [];
     }
 
     await productManager.addProduct(producto);
-    const productosActualizados = await productManager.getProducts();
-    io.emit("productosActualizados", productosActualizados);
+    const updatedResult = await productManager.getProducts();
+    io.emit("productosActualizados", updatedResult.payload);
   });
 
   socket.on("eliminarProducto", async (id) => {
     await productManager.deleteProduct(id);
-    const productosActualizados = await productManager.getProducts();
-    io.emit("productosActualizados", productosActualizados);
+    const updatedResult = await productManager.getProducts();
+    io.emit("productosActualizados", updatedResult.payload);
   });
 });
 

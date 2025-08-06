@@ -1,0 +1,15 @@
+<h1>{{product.title}}</h1>
+
+{{#if product.thumbnails.length}}
+  <img src="{{product.thumbnails.0}}" alt="{{product.title}}" />
+{{else}}
+  <img src="/img/default-product.png" alt="Sin imagen" />
+{{/if}}
+
+<p><strong>Descripción:</strong> {{product.description}}</p>
+<p><strong>Código:</strong> {{product.code}}</p>
+<p><strong>Precio:</strong> ${{product.price}}</p>
+<p><strong>Stock disponible:</strong> {{product.stock}}</p>
+<p><strong>Categoría:</strong> {{product.category}}</p>
+
+<button onclick="addToCart('{{product._id}}')">Agregar al carrito</button>

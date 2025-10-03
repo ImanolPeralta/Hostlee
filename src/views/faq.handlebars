@@ -1,0 +1,42 @@
+<section class="page-container">
+  <h1>Preguntas Frecuentes</h1>
+
+  <div class="faq-item">
+    <button class="faq-question">¿Qué tipos de alojamientos ofrecen?</button>
+    <div class="faq-answer">
+      <p>Podés encontrar casas, departamentos, hoteles, cabañas y alojamientos
+        únicos como casas flotantes o domos.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">¿Cómo puedo reservar?</button>
+    <div class="faq-answer">
+      <p>Usá nuestro buscador, filtrá por fechas, precio y tipo de propiedad, y
+        completá la reserva directamente en la plataforma.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">¿Puedo cancelar mi reserva?</button>
+    <div class="faq-answer">
+      <p>Depende de la política de cancelación del alojamiento. Revisá la
+        información antes de confirmar tu estadía.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">¿Es seguro pagar aquí?</button>
+    <div class="faq-answer">
+      <p>Sí, todos los pagos se procesan con tecnología segura y nunca
+        compartimos tus datos financieros con terceros.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => { btn.classList.toggle('active'); const
+  answer = btn.nextElementSibling; answer.style.display = answer.style.display
+  === 'block' ? 'none' : 'block'; }); });
+</script>

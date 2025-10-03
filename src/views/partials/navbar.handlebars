@@ -7,17 +7,18 @@
 
     <nav class="nav-links">
       <a href="/">Inicio</a>
-      <a href="/products?tipo=departamento">Departamentos</a>
-      <a href="/products?tipo=casa">Casas</a>
-      <a href="/products?tipo=hotel">Hoteles</a>
+      <a href="/about">Acerca de Nosotros</a>
+      <a href="/faq">Preguntas Frecuentes</a>
+      <a href="/contact">Contacto</a>
     </nav>
 
     <div class="nav-actions">
-      <a href="/cart" class="cart-icon" title="Carrito de compras">
-        <i class="fas fa-shopping-basket"></i>
-        <span class="cart-count">0</span>
+      <a href="/api/carts/view" class="cart-icon" title="Carrito de compras">
+        <i class="fa-solid fa-calendar-week"></i>
+        <span class="cart-count">{{cartCount}}</span>
       </a>
-      <a href="/login" class="login-button">Ingresar</a>
+      <a href="/admin/login" class="login-button">Ingresar</a>
     </div>
   </div>
 </header>
+

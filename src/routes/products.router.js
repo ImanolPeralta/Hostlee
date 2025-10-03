@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   try {
     const { limit, page, sort, query } = req.query;
     const result = await manager.getProducts({ limit, page, sort, query });
-    res.json(result);
+    res.send(result);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener productos." });
   }

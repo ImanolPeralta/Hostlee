@@ -13,20 +13,37 @@
 
 <h2 class="section-title">Lista de productos</h2>
 <ul id="productList">
-  {{#each products}}
-    <li data-id="{{this.id}}">
-      <strong>{{this.title}}</strong>
-      <span>Precio: ${{this.price}}</span>
-      <button onclick="deleteProduct('{{this.id}}')">Eliminar</button>
-    </li>
-  {{/each}}
+  
 </ul>
+
+<!-- Modal para editar producto -->
+<div id="editModal" style="display:none; position:fixed; top:0; left:0; 
+     width:100%; height:100%; background:rgba(0,0,0,0.5); 
+     justify-content:center; align-items:center;">
+  <div style="background:white; padding:20px; border-radius:8px; max-width:400px; width:100%;">
+    <h3>Editar producto</h3>
+    <form id="editForm">
+      <input type="hidden" name="id" />
+      <input type="text" name="title" placeholder="Título" required />
+      <input type="text" name="description" placeholder="Descripción" required />
+      <input type="number" name="price" placeholder="Precio" required />
+      <input type="text" name="code" placeholder="Código" required />
+      <input type="number" name="stock" placeholder="Stock" required />
+      <input type="text" name="category" placeholder="Categoría" required />
+      <input type="text" name="imageUrl" placeholder="URL de imagen" required />
+      <button type="submit">Guardar cambios</button>
+      <button type="button" onclick="closeModal()">Cancelar</button>
+    </form>
+  </div>
+</div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
   const socket = io();
   const form = document.getElementById('productForm');
   const list = document.getElementById('productList');
+  const editModal = document.getElementById('editModal');
+  const editForm = document.getElementById('editForm');
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -44,43 +61,127 @@
     socket.emit('eliminarProducto', id);
   }
 
-  socket.on('productosActualizados', (products) => {
-    list.innerHTML = '';
-    products.forEach(p => {
-      const li = document.createElement('li');
-      li.dataset.id = p.id;
+  // ------------------- Editar producto -------------------
+  function editProduct(id) {
+    const li = document.querySelector(`li[data-id="${id}"]`);
+    if (!li) return;
 
-      // Imagen
-      if (p.thumbnails && p.thumbnails.length > 0) {
-        const img = document.createElement('img');
-        img.src = p.thumbnails[0];
-        img.alt = p.title;
-        img.style.width = '100px';
-        img.style.height = 'auto';
-        img.style.marginRight = '10px';
-        img.style.verticalAlign = 'middle';
-        li.appendChild(img);
-      }
+    editForm.id.value = id;
+    editForm.title.value = li.querySelector('.product-title').textContent;
+    editForm.price.value = Number(li.querySelector('.product-price').textContent.replace(/[^\d.]/g, ''));
+    editForm.description.value = li.querySelector('.product-description').textContent.replace('Descripción: ', '');
+    editForm.stock.value = Number(li.querySelector('.product-stock').textContent.replace('Stock: ', ''));
+    editForm.category.value = li.querySelector('.product-category').textContent.replace('Categoría: ', '');
+    editForm.code.value = li.querySelector('.product-code').textContent.replace('Código: ', '');
+    const img = li.querySelector('img');
+    editForm.imageUrl.value = img ? img.src : '';
 
-      // Título
-      const title = document.createElement('strong');
-      title.textContent = p.title;
-      li.appendChild(title);
+    openModal();
+  }
 
-      // Precio
-      const price = document.createElement('span');
-      price.textContent = ` - $${p.price}`;
-      price.style.marginLeft = '8px';
-      li.appendChild(price);
+  // ------------------- Guardar cambios -------------------
+  editForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(editForm);
+    const updatedProduct = Object.fromEntries(formData.entries());
+    updatedProduct.price = Number(updatedProduct.price);
+    updatedProduct.stock = Number(updatedProduct.stock);
 
-      // Botón eliminar
-      const btn = document.createElement('button');
-      btn.textContent = 'Eliminar';
-      btn.onclick = () => deleteProduct(p.id);
-      btn.style.marginLeft = '15px';
-      li.appendChild(btn);
-
-      list.appendChild(li);
-    });
+    socket.emit('editarProducto', updatedProduct);
+    closeModal();
   });
+
+  // ------------------- Abrir / cerrar modal -------------------
+  function openModal() {
+    editModal.style.display = 'flex';
+  }
+  function closeModal() {
+    editModal.style.display = 'none';
+  }
+
+
+  socket.on('productosActualizados', (products) => {
+  list.innerHTML = '';
+
+  products.forEach(p => {
+    const li = document.createElement('li');
+    li.dataset.id = p.id;
+
+    // ID
+    const idElem = document.createElement('p');
+    idElem.classList.add('product-id');
+    idElem.innerHTML = `<strong>ID:</strong> ${p.id}`;
+    li.appendChild(idElem);
+
+    // Imagen
+    if (p.thumbnails && p.thumbnails.length > 0) {
+      const img = document.createElement('img');
+      img.src = p.thumbnails[0];
+      img.alt = p.title;
+      img.classList.add('product-image');  // Usa esta clase para estilo CSS
+      li.appendChild(img);
+    }
+
+    // Título y precio en un contenedor para que quede inline
+    const titlePriceWrapper = document.createElement('div');
+    titlePriceWrapper.classList.add('title-price-wrapper');
+
+    const title = document.createElement('strong');
+    title.textContent = p.title;
+    title.classList.add('product-title');
+    titlePriceWrapper.appendChild(title);
+
+    const price = document.createElement('span');
+    price.textContent = ` $${p.price}`;
+    price.classList.add('product-price');
+    titlePriceWrapper.appendChild(price);
+
+    li.appendChild(titlePriceWrapper);
+
+    // Descripción
+    const description = document.createElement('p');
+    description.textContent = `Descripción: ${p.description}`;
+    description.classList.add('product-description');
+    li.appendChild(description);
+
+    // Stock
+    const stock = document.createElement('p');
+    stock.textContent = `Stock: ${p.stock}`;
+    stock.classList.add('product-stock');
+    li.appendChild(stock);
+
+    // Categoría
+    const category = document.createElement('p');
+    category.textContent = `Categoría: ${p.category}`;
+    category.classList.add('product-category');
+    li.appendChild(category);
+
+    // Código
+    const code = document.createElement('p');
+    code.textContent = `Código: ${p.code}`;
+    code.classList.add('product-code');
+    li.appendChild(code);
+
+    // Botones
+    const btnWrapper = document.createElement('div');
+    btnWrapper.classList.add('button-wrapper');
+
+    const editBtn = document.createElement('button-edit');
+    editBtn.textContent = 'Editar';
+    editBtn.classList.add('btn-edit');
+    editBtn.onclick = () => editProduct(p.id);
+    btnWrapper.appendChild(editBtn);
+
+    const deleteBtn = document.createElement('button-delete');
+    deleteBtn.textContent = 'Eliminar';
+    deleteBtn.classList.add('btn-delete');
+    deleteBtn.onclick = () => deleteProduct(p.id);
+    btnWrapper.appendChild(deleteBtn);
+
+    li.appendChild(btnWrapper);
+
+    list.appendChild(li);
+  });
+});
+
 </script>

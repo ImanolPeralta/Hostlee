@@ -1,0 +1,53 @@
+<div class="cart-wrapper">
+  <h1>Tu Carrito de Compras</h1>
+
+  {{#if products.length}}
+  <div class="cart-content">
+
+    <div class="cart-items">
+      {{#each products}}
+      <div class="cart-item">
+        <img src="{{this.product.thumbnails.[0]}}" alt="{{this.product.title}}" class="cart-item-img" />
+
+        <div class="cart-item-info">
+          <h3>{{this.product.title}}</h3>
+          <p class="category">{{this.product.category}}</p>
+          <p class="code">Código: {{this.product.code}}</p>
+          <p class="price">Precio unitario: ${{this.product.price}}</p>
+
+          <div class="quantity-controls">
+            <button onclick="updateQuantity('{{this.product._id}}', {{this.quantity}} - 1)" aria-label="Disminuir cantidad">-</button>
+            <input type="number" min="1" value="{{this.quantity}}" onchange="updateQuantity('{{this.product._id}}', this.value)" aria-label="Cantidad" />
+            <button onclick="updateQuantity('{{this.product._id}}', {{this.quantity}} + 1)" aria-label="Aumentar cantidad">+</button>
+          </div>
+
+          <p class="subtotal">Subtotal: ${{multiply this.product.price this.quantity}}</p>
+
+          <button class="remove-btn" onclick="removeFromCart('{{this.product._id}}')" aria-label="Eliminar producto">
+            <i class="fa fa-trash"></i> Eliminar
+          </button>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+    <aside class="cart-summary">
+      <h2>Resumen de tu compra</h2>
+
+      <p><strong>Subtotal:</strong> ${{calculateSubtotal products}}</p>
+      <p><strong>Impuestos (21% IVA):</strong> ${{calculateTax products}}</p>
+      <p><strong>Envío:</strong> ${{shippingCost products}}</p>
+      <hr />
+      <p class="total"><strong>Total:</strong> ${{calculateTotal products}}</p>
+
+      <button class="btn checkout-btn">Finalizar compra</button>
+      <button class="btn continue-btn" onclick="window.location.href='/'">Seguir comprando</button>
+    </aside>
+
+  </div>
+  {{else}}
+  <p class="empty-msg">Tu carrito está vacío.</p>
+  {{/if}}
+</div>
+
+<script src="/js/cart.js"></script>

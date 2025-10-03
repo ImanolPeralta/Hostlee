@@ -39,10 +39,17 @@ export default class ProductManager {
     };
   }
 
+  // Obtener producto por code
+async getProductByCode(code) {
+  return ProductModel.findOne({ code }).lean();
+}
+
+
+  // Obtener producto por ID
   async getProductById(id) {
     return ProductModel.findById(id).lean();
   }
-
+  // Agregar producto
   async addProduct(product) {
     const requiredFields = [
       "title",
@@ -66,16 +73,15 @@ export default class ProductManager {
 
     return newProduct.toObject();
   }
-
+  // Actualizar producto
   async updateProduct(id, updates) {
     const updated = await ProductModel.findByIdAndUpdate(id, updates, {
       new: true,
       runValidators: true,
     }).lean();
-
     return updated;
   }
-
+  // Borrar producto
   async deleteProduct(id) {
     const result = await ProductModel.findByIdAndDelete(id);
     return !!result;

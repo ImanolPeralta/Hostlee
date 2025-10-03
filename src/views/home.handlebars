@@ -1,74 +1,86 @@
-<section class="hero">
-  <div class="hero-overlay">
-    <h1 class="hero-title">¿A dónde te gustaría viajar?</h1>
-    <form action="/search" method="GET" class="search-bar">
-      <input
-        type="text"
-        name="query"
-        placeholder="Conocé nuestras opciones..."
-        value="{{query}}"
-        required
-      />
-      <button type="submit">Buscar</button>
-    </form>
-  </div>
-</section>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Home | Alquileres</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <!-- Hero section -->
+      <section class="hero">
+        <div class="hero-overlay">
+          <h1 class="hero-title animate-fade-in">Bienvenido a Hostlee</h1>
+          <p class="hero-subtitle animate-slide-in">Tu próximo alojamiento está
+            a un clic de distancia</p>
+        </div>
+      </section>
 
-<h1 class="section-title">Nuestras Propiedades</h1>
+      <!-- Filtros de búsqueda -->
+      <form method="GET" action="/" class="filter-form">
+        <input
+          type="text"
+          name="query"
+          placeholder="Buscar por categoría, estilo, etc."
+          class="filter-input"
+        />
+        <select name="sort" class="filter-select">
+          <option value="">Ordenar por</option>
+          <option value="asc">Mayor precio</option>
+          <option value="desc">Menor precio</option>
+        </select>
+        <select name="limit" class="filter-select">
+          <option value="5">5 por página</option>
+          <option value="10">10 por página</option>
+          <option value="20">20 por página</option>
+        </select>
+        <button type="submit" class="filter-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
 
-<!-- Filtro y orden -->
-<form method="GET" action="/products" class="filter-form" style="max-width: 400px; margin: 0 auto 2rem;">
-  <input
-    type="text"
-    name="query"
-    placeholder="Buscar por categoría o 'available'"
-    value="{{query}}"
-    style="padding: 10px 15px; border-radius: 50px; border: 1px solid #e2e8f0; width: 65%; margin-right: 0.5rem;"
-  />
-
-  <select name="sort" style="padding: 10px 15px; border-radius: 50px; border: 1px solid #e2e8f0; width: 30%;">
-    <option value="">Ordenar por precio</option>
-    <option value="asc" {{#if (eq sort 'asc')}}selected{{/if}}>Ascendente</option>
-    <option value="desc" {{#if (eq sort 'desc')}}selected{{/if}}>Descendente</option>
-  </select>
-
-  <button
-    type="submit"
-    style="padding: 10px 20px; background-color: #ff6b6b; color: white; border: none; border-radius: 50px; cursor: pointer; margin-left: 10px;"
-  >
-    Filtrar
-  </button>
-</form>
-
-<!-- Productos -->
-<div class="product-grid">
-  {{#each products}}
-    <div class="product-card">
-      {{#if this.thumbnails.length}}
-        <img src="{{this.thumbnails.[0]}}" alt="{{this.title}}" />
-      {{else}}
-        <img src="/img/default-product.png" alt="Sin imagen disponible" />
-      {{/if}}
-      <div class="product-details">
-        <h3>{{this.title}}</h3>
-        <p class="description">{{this.description}}</p>
-        <p class="price">Precio: <strong>${{this.price}}</strong></p>
-        <p class="stock">Habitaciones disponibles: <strong>{{this.stock}}</strong></p>
-        <button class="reserve-btn" onclick="addToCart('{{this._id}}')">Reservar</button>
+      <!-- Grid de productos -->
+      <div class="product-grid">
+        {{#each products}}
+          <a href="/products/{{this._id}}" class="product-card-link">
+            <div class="product-card">
+              {{#if this.thumbnails.length}}
+                <img src="{{lookup this.thumbnails 0}}" alt="{{this.title}}" />
+              {{else}}
+                <img
+                  src="/img/default-product.png"
+                  alt="Sin imagen disponible"
+                />
+              {{/if}}
+              <div class="product-details">
+                <h3>{{this.title}}</h3>
+                <p class="description">{{this.description}}</p>
+                <p class="price">Precio: <strong>${{this.price}}</strong></p>
+                <p class="stock">Habitaciones disponibles:
+                  <strong>{{this.stock}}</strong>
+                </p>
+              </div>
+            </div>
+          </a>
+        {{/each}}
       </div>
-    </div>
-  {{/each}}
-</div>
 
-<!-- Paginación -->
-<div class="pagination" style="text-align: center; margin: 2rem 0;">
-  {{#if pagination.hasPrevPage}}
-    <a href="{{pagination.prevLink}}" class="pagination-link" style="margin-right: 1rem;">Anterior</a>
-  {{/if}}
+      <!-- Paginación -->
+      <div class="pagination">
+        {{#if hasPrevPage}}
+          <a
+            href="?page={{prevPage}}&limit={{limit}}&sort={{sort}}&query={{query}}"
+          >Anterior</a>
+        {{/if}}
+        <span>Página {{page}} de {{totalPages}}</span>
+        {{#if hasNextPage}}
+          <a
+            href="?page={{nextPage}}&limit={{limit}}&sort={{sort}}&query={{query}}"
+          >Siguiente</a>
+        {{/if}}
+      </div>
+    </main>
 
-  <span>Página {{pagination.page}} de {{pagination.totalPages}}</span>
-
-  {{#if pagination.hasNextPage}}
-    <a href="{{pagination.nextLink}}" class="pagination-link" style="margin-left: 1rem;">Siguiente</a>
-  {{/if}}
-</div>
+    <script>
+      function addToCart(productId) { alert("Reservado: " + productId); //
+      Acápodés hacer un fetch al carrito o guardar en localStorage }
+    </script>
+  </body>
+</html>

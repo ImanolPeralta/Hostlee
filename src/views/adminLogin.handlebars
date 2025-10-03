@@ -1,0 +1,17 @@
+<div class="login-container">
+  <h1>Acceso Administrador</h1>
+
+  {{#if error}}
+    <div class="error-message">{{error}}</div>
+  {{/if}}
+
+  <form action="/admin/login" method="POST">
+    <label for="email">Correo electrónico</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="password">Contraseña</label>
+    <input type="password" name="password" id="password" required>
+
+    <button type="submit">Ingresar</button>
+  </form>
+</div>

@@ -1,24 +1,26 @@
-<form id="loginForm">
-  <input name="email" type="email" required placeholder="Email" />
-  <input name="password" type="password" required placeholder="Contraseña" />
-  <button type="submit">Entrar</button>
-</form>
+<div class="auth-container">
+  <div class="auth-box">
+    <h2>Iniciar sesión</h2>
+    <form id="loginForm">
+      <input name="email" type="email" required placeholder="Email" />
+      <input
+        name="password"
+        type="password"
+        required
+        placeholder="Contraseña"
+      />
+      <button type="submit">Entrar</button>
+    </form>
+    <p>¿No tenés cuenta? <a href="/register">Registrate acá</a></p>
+  </div>
+</div>
 
 <script>
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const data = {
-    email: e.target.email.value,
-    password: e.target.password.value
-  };
-  const res = await fetch('/api/sessions/login', {
-    method: 'POST',
-    credentials: 'include', // IMPORTANTE para que el browser guarde cookie httpOnly
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-  const json = await res.json();
-  if (res.ok) window.location.href = '/profile';
-  else alert(json.message || 'Error');
-});
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault(); const data = { email: e.target.email.value, password:
+  e.target.password.value }; const res = await fetch('/api/sessions/login', {
+  method: 'POST', credentials: 'include', // IMPORTANTE para que el browser
+  guarde cookie httpOnly headers: { 'Content-Type': 'application/json' }, body:
+  JSON.stringify(data) }); const json = await res.json(); if (res.ok)
+  window.location.href = '/profile'; else alert(json.message || 'Error'); });
 </script>

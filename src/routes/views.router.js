@@ -2,13 +2,11 @@ import { Router } from "express";
 import ProductManager from "../managers/ProductManager.js";
 
 const router = Router();
-const productManager = new ProductManager(); // Sin path, ya no es archivo JSON
+const productManager = new ProductManager(); // Ya usa base de datos o memoria
 
-/*
-- Ruta principal
-- Renderiza la vista "home" con los productos
-- Permite paginación, ordenamiento y filtrado de productos
-*/
+// ----------------------
+// 🏠 Página principal
+// ----------------------
 router.get("/", async (req, res) => {
   try {
     const { limit, page, sort, query } = req.query;
@@ -38,7 +36,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Ruta "Administración"
+// ----------------------
+// 🧑‍💼 Panel de administración
+// ----------------------
 router.get("/admin", async (req, res) => {
   try {
     const result = await productManager.getProducts({ limit: 100 });
@@ -52,7 +52,9 @@ router.get("/admin", async (req, res) => {
   }
 });
 
-// Ruta "Detalle De Producto"
+// ----------------------
+// 🛍️ Detalle de producto
+// ----------------------
 router.get("/products/:pid", async (req, res) => {
   const pid = req.params.pid;
   const product = await productManager.getProductById(pid);
@@ -64,17 +66,42 @@ router.get("/products/:pid", async (req, res) => {
   res.render("productDetail", { product });
 });
 
-// Ruta "Acerca de Nosotros"
+// ----------------------
+// 🧾 Carrito
+// ----------------------
+router.get("/cart", (req, res) => {
+  res.render("cart", { title: "Tu Carrito" });
+});
+
+// ----------------------
+// 👤 Registro y Login
+// ----------------------
+router.get("/register", (req, res) => {
+  res.render("register", { title: "Crear cuenta" });
+});
+
+router.get("/login", (req, res) => {
+  res.render("login", { title: "Iniciar sesión" });
+});
+
+// ----------------------
+// 👥 Perfil del usuario
+// ----------------------
+router.get("/profile", (req, res) => {
+  res.render("profile", { title: "Perfil de usuario" });
+});
+
+// ----------------------
+// 📄 Secciones informativas
+// ----------------------
 router.get("/about", (req, res) => {
   res.render("about", { title: "Acerca de Nosotros" });
 });
 
-// Ruta "Preguntas Frecuentes"
 router.get("/faq", (req, res) => {
   res.render("faq", { title: "Preguntas Frecuentes" });
 });
 
-// Ruta "Contacto"
 router.get("/contact", (req, res) => {
   res.render("contact", { title: "Contacto" });
 });

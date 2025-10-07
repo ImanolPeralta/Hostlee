@@ -1,8 +1,11 @@
 import { Router } from "express";
+import passport from "passport";
+import CartsService from "../services/carts.services.js";
 import CartManager from "../managers/CartManager.js";
 
 const router = Router();
 const manager = new CartManager();
+const service = new CartsService();
 
 // Middleware para asegurar que el carrito exista
 router.use(async (req, res, next) => {
@@ -24,6 +27,30 @@ router.use(async (req, res, next) => {
     res.status(500).json({ error: "Error al inicializar el carrito." });
   }
 });
+
+// POST /api/carts/:cid/purchase
+router.post(
+  "/:cid/purchase",
+  passport.authenticate("current", { session: false }),
+  async (req, res, next) => {
+    try {
+    const cid = req.params.cid;
+    const user = req.user;
+
+    // Autorización: el usuario debe ser el dueño del carrito o admin
+    if (user.role !== "admin" && String(user.cart) !== String(cid)) {
+      return res.status(403).json({ error: "Forbiden: cannot purchase this cart" });
+    }
+
+    const purchaserEmail = user.email;
+    const { ticket, unprocessed } = await CartsService.purchaseCart(cid, purchaserEmail);
+
+    return res.json({ status: "sucess", ticket, unprocessed });
+  } catch (err) {
+    next(err);
+  }
+}
+);
 
 // Crear carrito manualmente (solo si realmente querés hacerlo)
 router.post("/", async (req, res) => {

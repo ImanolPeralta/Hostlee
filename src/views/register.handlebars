@@ -1,14 +1,30 @@
 <div class="auth-container">
   <div class="auth-box">
-    <h2>Crear cuenta</h2>
-    <form id="registerForm" method="post" action="/api/sessions/register">
-      <input name="first_name" required placeholder="Nombre" />
-      <input name="last_name" required placeholder="Apellido" />
-      <input name="email" type="email" required placeholder="Email" />
-      <input name="age" type="number" placeholder="Edad" />
-      <input name="password" type="password" required placeholder="Contraseña" />
-      <button type="submit">Registrarme</button>
-    </form>
-    <p>¿Ya tenés cuenta? <a href="/login">Iniciá sesión</a></p>
+    <div class="register-left">
+      <h2>Crear cuenta</h2>
+
+      <form id="registerForm" method="post" action="/api/sessions/register">
+        <div class="form-grid">
+          <input name="first_name" required placeholder="Nombre" />
+          <input name="last_name" required placeholder="Apellido" />
+        </div>
+        <input name="email" type="email" required placeholder="Correo electrónico" />
+        <input name="age" type="number" placeholder="Edad" />
+        <input name="password" type="password" required placeholder="Contraseña" />
+        <button type="submit" class="btn-register">Registrarme</button>
+      </form>
+
+      <p class="login-link">
+        ¿Ya tenés cuenta? <a href="/login">Iniciá sesión</a>
+      </p>
+    </div>
+
+    <div class="register-right">
+      <h3>¡Unite a Hostlee!</h3>
+      <p>
+        Registrate y comenzá a disfrutar de experiencias únicas de hospedaje
+        en todo el mundo. ¡Explorá, reservá y viví tu próxima aventura!
+      </p>
+    </div>
   </div>
 </div>

@@ -1401,75 +1401,125 @@ body {
 }
 
 /* ====== Login Admin ====== */
-.login-container {
-  max-width: 420px;
-  margin: 160px auto;
-  padding: 2rem 2.5rem;
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparente */
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(8px);
-  animation: fadeIn 0.4s ease-in-out;
+/* === LOGIN ADMINISTRADOR === */
+
+.admin-login {
+  background-color: #edf2f7; /* un gris más neutro */
 }
 
-.login-container h1 {
-  font-size: 1.8rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #222;
-  font-weight: 600;
-}
-
-.login-container label {
-  display: block;
-  margin-bottom: 0.4rem;
-  font-weight: 500;
-  color: #444;
-}
-
-.login-container input {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1.2rem;
-  border: 1px solid #ddd;
+.admin-box {
   border-radius: 10px;
-  font-size: 1rem;
-  transition: all 0.25s ease;
+  overflow: hidden;
+  display: flex;
+  width: 850px;
+  height: 450px;
+  background: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-.login-container input:focus {
-  border-color: #4fd1c5;
-  box-shadow: 0 0 0 3px rgba(79, 209, 197, 0.3);
-  outline: none;
+.admin-left,
+.admin-right {
+  flex: 1;
+  padding: 50px;
 }
 
-.login-container button {
-  width: 100%;
-  padding: 0.8rem;
-  background: linear-gradient(135deg, #4fd1c5, #3baea0);
-  border: none;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Lado izquierdo (formulario) */
+.admin-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff;
 }
 
-.login-container button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(79, 209, 197, 0.4);
+.admin-left h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #1e293b;
+  font-family: "Segoe UI", sans-serif;
 }
 
+/* Mensaje de error */
 .error-message {
-  background: rgba(255, 0, 0, 0.1);
-  color: #d93025;
-  border: 1px solid #d93025;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border-radius: 10px;
-  font-size: 0.9rem;
+  background-color: #fed7d7;
+  color: #c53030;
+  border: 1px solid #feb2b2;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-align: center;
 }
+
+.admin-left input {
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.admin-left input:focus {
+  border-color: #FF6B6B;
+  outline: none;
+  box-shadow: 0 0 4px rgba(206, 73, 49, 0.3);
+}
+
+.btn-admin {
+  background-color: #FF6B6B; /* azul profesional */
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-admin:hover {
+  background-color: #e65b5b;
+}
+
+/* Panel derecho (info visual) */
+.admin-right {
+  position: relative;
+  background: url("/img/admin-bg.jpg") center/cover no-repeat;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.admin-right::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(138, 30, 30, 0.6); /* azul oscuro con transparencia */
+  backdrop-filter: blur(3px);
+}
+
+.admin-right h3,
+.admin-right p {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-right h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.admin-right p {
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
 
 @keyframes fadeIn {
   from {
@@ -1487,95 +1537,255 @@ body {
    ============================= */
 
 .auth-container {
-  min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #e3f2fd, #e1bee7);
-  padding: 2rem;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f2f4f8;
+  font-family: "Segoe UI", sans-serif;
 }
 
 .auth-box {
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  padding: 2.5rem;
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-  transition: transform 0.3s ease;
+  display: flex;
+  width: 850px;
+  height: 480px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.auth-box:hover {
-  transform: translateY(-3px);
+.login-left,
+.login-right {
+  flex: 1;
+  padding: 50px;
 }
 
-.auth-box h2 {
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #333;
-}
-
-.auth-box form {
+.login-left {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  justify-content: center;
+  background: #fff;
 }
 
-.auth-box input {
+.login-left h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.login-left form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-left input {
   padding: 12px 15px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+  margin-bottom: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.login-left input:focus {
+  border-color: #4FD1C5;
   outline: none;
-  transition: border-color 0.3s ease;
+  box-shadow: 0 0 4px rgba(4, 116, 145, 0.3);
 }
 
-.auth-box input:focus {
-  border-color: #7b1fa2;
-  box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.15);
-}
-
-.auth-box button {
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #7b1fa2, #512da8);
-  color: white;
-  font-size: 1rem;
+.btn-login {
+  background-color: #4FD1C5;
+  color: #fff;
   font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  padding: 12px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s;
 }
 
-.auth-box button:hover {
-  background: linear-gradient(90deg, #512da8, #311b92);
-  transform: scale(1.03);
+.btn-login:hover {
+  background-color: #319795;
 }
 
-.auth-box p {
-  margin-top: 1rem;
-  color: #666;
+.signup-link {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #4a5568;
 }
 
-.auth-box a {
-  color: #7b1fa2;
+.signup-link a {
+  color: #4FD1C5;
   text-decoration: none;
   font-weight: 500;
 }
 
-.auth-box a:hover {
-  text-decoration: underline;
+.signup-link a:hover {
+  text-decoration: none;
+  color: #319795;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .auth-box {
-    padding: 2rem 1.5rem;
-  }
+/* Panel derecho */
+.login-right {
+  position: relative;
+  background: url("/img/login-bg.jpg") center/cover no-repeat;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
 
-  .auth-box h2 {
-    font-size: 1.5rem;
-  }
+.login-right::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* oscurece un poco */
+  backdrop-filter: blur(3px); /* efecto sutil de desenfoque */
+}
+
+.login-right h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.login-right p {
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 300px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* === Estilos específicos para el registro === */
+
+/* Reutiliza la misma estructura general */
+.register-left,
+.register-right {
+  flex: 1;
+  padding: 50px;
+}
+
+/* Lado izquierdo (formulario) */
+.register-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff;
+}
+
+.register-left h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.register-left form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Para que los campos de nombre y apellido estén lado a lado */
+.form-grid {
+  display: flex;
+  gap: 15px;
+}
+
+.form-grid input {
+  flex: 1;
+}
+
+.register-left input {
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.register-left input:focus {
+  border-color: #4FD1C5;
+  outline: none;
+  box-shadow: 0 0 4px rgba(4, 116, 145, 0.3);
+}
+
+/* Botón principal del registro */
+.btn-register {
+  background-color: #4FD1C5;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-register:hover {
+  background-color: #319795;
+}
+
+/* Enlace a login */
+.login-link {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #4a5568;
+}
+
+.login-link a {
+  color: #4FD1C5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  color: #319795;
+}
+
+/* Panel derecho del registro */
+.register-right {
+  position: relative;
+  background: url("/img/register-bg.jpg") center/cover no-repeat;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.register-right::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+}
+
+.register-right h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.register-right p {
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 300px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
